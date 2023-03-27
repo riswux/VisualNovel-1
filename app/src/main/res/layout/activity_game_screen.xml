@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".GameScreen">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/margin"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".MainActivity">
+
+        <ImageView
+            android:id="@+id/gameView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            app:srcCompat="@drawable/backgroud1" />
+
+        <ImageView
+            android:id="@+id/gameMC"
+            android:layout_width="291dp"
+            android:layout_height="640dp"
+            android:layout_marginEnd="140dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="1.0"
+            app:srcCompat="@drawable/cat" />
+
+        <Button
+            android:id="@+id/choiceButton1"
+            android:layout_width="421dp"
+            android:layout_height="50dp"
+            android:backgroundTint="#5999AD"
+            android:text="button"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.713" />
+
+        <Button
+            android:id="@+id/choiceButton2"
+            android:layout_width="421dp"
+            android:layout_height="50dp"
+            android:backgroundTint="#5999AD"
+            android:text="button"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.7"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.822" />
+
+        <Button
+            android:id="@+id/choiceButton3"
+            android:layout_width="421dp"
+            android:layout_height="50dp"
+            android:backgroundTint="#5999AD"
+            android:text="button"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.926" />
+
+        <TextView
+            android:id="@+id/gameTextView"
+            android:layout_width="420dp"
+            android:layout_height="41dp"
+            android:layout_marginStart="2dp"
+            android:background="#275168"
+            android:backgroundTintMode="add"
+            android:fallbackLineSpacing="false"
+            android:hapticFeedbackEnabled="false"
+            android:padding="8dp"
+            android:textAlignment="center"
+            android:textAllCaps="false"
+            android:textColor="#FFFFFF"
+            android:textIsSelectable="false"
+            android:textSize="17dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.454"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.566" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/inputName"
+            android:layout_width="421dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="400dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/choiceButton2"
+            app:layout_constraintStart_toStartOf="@+id/gameView"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Input Your name..."
+                android:singleLine="true"
+                android:textStyle="italic" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
