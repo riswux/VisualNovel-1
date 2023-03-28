@@ -10,8 +10,8 @@
 
     <Button
         android:id="@+id/startButton"
-        android:layout_width="427dp"
-        android:layout_height="51dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         android:backgroundTint="#275168"
         android:text="Start"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -23,8 +23,8 @@
 
     <TextView
         android:id="@+id/textView"
-        android:layout_width="420dp"
-        android:layout_height="97dp"
+        android:layout_width="0dp"
+        android:layout_height="100dp"
         android:background="#659CB8"
         android:fontFamily="sans-serif"
         android:text="My Visual Novel"

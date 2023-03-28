@@ -21,19 +21,20 @@
 
         <ImageView
             android:id="@+id/gameMC"
-            android:layout_width="291dp"
-            android:layout_height="640dp"
-            android:layout_marginEnd="140dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="1.0"
             app:srcCompat="@drawable/cat" />
 
         <Button
             android:id="@+id/choiceButton1"
-            android:layout_width="421dp"
-            android:layout_height="50dp"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
             android:backgroundTint="#5999AD"
             android:text="button"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -45,8 +46,8 @@
 
         <Button
             android:id="@+id/choiceButton2"
-            android:layout_width="421dp"
-            android:layout_height="50dp"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
             android:backgroundTint="#5999AD"
             android:text="button"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -58,8 +59,8 @@
 
         <Button
             android:id="@+id/choiceButton3"
-            android:layout_width="421dp"
-            android:layout_height="50dp"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
             android:backgroundTint="#5999AD"
             android:text="button"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -70,9 +71,8 @@
 
         <TextView
             android:id="@+id/gameTextView"
-            android:layout_width="420dp"
-            android:layout_height="41dp"
-            android:layout_marginStart="2dp"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
             android:background="#275168"
             android:backgroundTintMode="add"
             android:fallbackLineSpacing="false"
@@ -85,10 +85,10 @@
             android:textSize="17dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.454"
+            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.566" />
+            app:layout_constraintVertical_bias="0.563" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/inputName"
