@@ -46,6 +46,27 @@ class Story(private val binding: ActivityGameScreenBinding) {
 
     }
 
+    fun updateGameState(
+        imageResource: Int,
+        gameText: String,
+        choiceButton1Text: String,
+        choiceButton2Text: String,
+        choiceButton3Text: String,
+        nextPosition1Value: String,
+        nextPosition2Value: String,
+        nextPosition3Value: String) {
+        setGameViews(imageResource, gameText)
+        setChoiceButtons(choiceButton1Text, choiceButton2Text, choiceButton3Text)
+        updateNextPositions(nextPosition1Value, nextPosition2Value, nextPosition3Value)
+    }
+
+    fun setGameViews(imageResource: Int, gameText: String) {
+        binding.gameView.setImageResource(imageResource)
+        binding.gameTextView.setText(gameText)
+        binding.gameMC.setVisibility(View.INVISIBLE)
+        binding.inputName.setVisibility(View.INVISIBLE)
+    }
+
     fun setChoiceButtons(choiceButton1Text: String, choiceButton2Text: String, choiceButton3Text: String) {
         binding.choiceButton1.setText(choiceButton1Text)
         binding.choiceButton2.setText(choiceButton2Text)
@@ -72,215 +93,142 @@ class Story(private val binding: ActivityGameScreenBinding) {
     }
 
     fun startingPoint(){
+        updateGameState(
+            R.drawable.backgroud1,
+            "",
+            "Walking",
+            "Hiking",
+            "Go to the field",
+            "walking",
+            "Hiking",
+            "Go to the field")
+
         val inputEditText = binding.inputName.editText
         val username = inputEditText?.text.toString()
 
-        binding.gameTextView.text = "Great,  $username! What are we going to do?"
-
+        binding.gameTextView.text = "Great, $username! What are we going to do?"
         binding.inputName.setVisibility(View.INVISIBLE)
-
-        binding.choiceButton1.setText("Walking")
-        binding.choiceButton2.setText("Hiking")
-        binding.choiceButton3.setText("Go to the field")
-
         showAllbuttons()
-
-        nextPosition1= "walking"
-        nextPosition2= "hiking"
-        nextPosition3= "field"
-    }
-    fun walking(){
-
-        binding.gameView.setImageResource(R.drawable.walking)
-        binding.gameTextView.setText("Maybe go home?")
-        binding.gameMC.setVisibility(View.INVISIBLE)
-
-        binding.inputName.setVisibility(View.INVISIBLE)
-
-        binding.choiceButton1.setText("")
-        binding.choiceButton2.setText("Yes, and watch film")
-        binding.choiceButton3.setText("Yes, and celebrate the hallowen")
-
-        binding.choiceButton1.setVisibility(View.INVISIBLE)
-
-        nextPosition1= ""
-        nextPosition2= "film"
-        nextPosition3= "halloween"
     }
 
-    fun hiking(){
 
-        binding.gameView.setImageResource(R.drawable.hiking)
-        binding.gameMC.setVisibility(View.INVISIBLE)
-
-        binding.inputName.setVisibility(View.INVISIBLE)
-
-        binding.gameTextView.setText("How cozy... But it’s already getting dark...")
-
-        binding.choiceButton1.setText("")
-        binding.choiceButton2.setText("Go home and watch the film")
-        binding.choiceButton3.setText("Go home and celebrate Halloween")
-
-        binding.choiceButton1.setVisibility(View.INVISIBLE)
-
-        nextPosition1= ""
-        nextPosition2= "film"
-        nextPosition3= "halloween"
+    fun walking() {
+        updateGameState(
+            R.drawable.walking,
+            "Maybe go home?",
+            "",
+            "Yes, and watch film",
+            "Yes, and celebrate Halloween",
+            "",
+            "film",
+            "halloween")
     }
 
-    fun field(){
-
-        binding.gameView.setImageResource(R.drawable.field)
-        binding.gameTextView.setText("You are sad... Let’s go home?")
-        binding.gameMC.setVisibility(View.INVISIBLE)
-
-        binding.inputName.setVisibility(View.INVISIBLE)
-
-        binding.choiceButton1.setText("")
-        binding.choiceButton2.setText("Maybe, let’s watch the film?")
-        binding.choiceButton3.setText("Yes, let’s celebrate the Halloween")
-
-        binding.choiceButton1.setVisibility(View.INVISIBLE)
-
-        nextPosition1= ""
-        nextPosition2= "film"
-        nextPosition3= "halloween"
+    fun hiking() {
+        updateGameState(
+            R.drawable.hiking,
+            "How cozy... But it’s already getting dark...",
+            "",
+            "Go home and watch the film",
+            "Go home and celebrate Halloween",
+            "",
+            "film",
+            "halloween")
     }
 
-    fun film(){
-
-        binding.gameView.setImageResource(R.drawable.film)
-        binding.gameTextView.setText("Do you like this film?")
-        binding.gameMC.setVisibility(View.INVISIBLE)
-
-        binding.inputName.setVisibility(View.INVISIBLE)
-
-        binding.choiceButton1.setText("")
-        binding.choiceButton2.setText("I like it!")
-        binding.choiceButton3.setText("No...")
-
-        binding.choiceButton1.setVisibility(View.INVISIBLE)
-
-        nextPosition1= ""
-        nextPosition2= "likefilm"
-        nextPosition3= "dislikefilm"
-    }
-    fun likefilm(){
-
-        binding.gameView.setImageResource(R.drawable.film)
-        binding.gameTextView.setText("Great! It’s time to sleep...")
-        binding.gameMC.setVisibility(View.INVISIBLE)
-
-        binding.inputName.setVisibility(View.INVISIBLE)
-
-        binding.choiceButton1.setText("Yes, it’s too late...")
-        binding.choiceButton2.setText("")
-        binding.choiceButton3.setText("")
-
-        binding.choiceButton1.setVisibility(View.VISIBLE)
-        binding.choiceButton2.setVisibility(View.INVISIBLE)
-        binding.choiceButton3.setVisibility(View.INVISIBLE)
-
-        nextPosition1= "endPoint"
-        nextPosition2= ""
-        nextPosition3= ""
-    }
-    fun dislikefilm(){
-
-        binding.gameView.setImageResource(R.drawable.film)
-        binding.gameTextView.setText("May be go sleep?")
-        binding.gameMC.setVisibility(View.INVISIBLE)
-
-        binding.inputName.setVisibility(View.INVISIBLE)
-
-        binding.choiceButton1.setText("Yes, it’s too late...")
-        binding.choiceButton2.setText("")
-        binding.choiceButton3.setText("")
-
-        binding.choiceButton1.setVisibility(View.VISIBLE)
-        binding.choiceButton2.setVisibility(View.INVISIBLE)
-        binding.choiceButton3.setVisibility(View.INVISIBLE)
-
-        nextPosition1= "endPoint"
-        nextPosition2= ""
-        nextPosition3= ""
+    fun field() {
+        updateGameState(
+            R.drawable.field,
+            "You are sad... Let’s go home?",
+            "",
+            "Maybe, let’s watch the film?",
+            "Yes, let’s celebrate the Halloween",
+            "",
+            "film",
+            "halloween")
     }
 
-    fun halloween(){
-
-        binding.gameView.setImageResource(R.drawable.costum)
-        binding.gameTextView.setText("Very beautiful!")
-        binding.gameMC.setVisibility(View.INVISIBLE)
-
-        binding.inputName.setVisibility(View.INVISIBLE)
-
-        binding.choiceButton1.setText("")
-        binding.choiceButton2.setText("Yes! Let’s watch the film!")
-        binding.choiceButton3.setText("Yes! Let’s create costume!")
-
-        binding.choiceButton1.setVisibility(View.INVISIBLE)
-
-        nextPosition1= ""
-        nextPosition2= "film"
-        nextPosition3= "costom"
+    fun film() {
+        updateGameState(R.drawable.film,
+            "Do you like this film?",
+            "",
+            "I like it!",
+            "No...",
+            "",
+            "likefilm",
+            "dislikefilm")
     }
-    fun costom(){
 
-        binding.gameView.setImageResource(R.drawable.haloween)
-        binding.gameTextView.setText("I like your costume.")
-        binding.gameMC.setVisibility(View.INVISIBLE)
-
-        binding.inputName.setVisibility(View.INVISIBLE)
-
-        binding.choiceButton1.setText("")
-        binding.choiceButton2.setText("Your costume is beautiful too!")
-        binding.choiceButton3.setText("To tell you the truth, I don’t like your...")
-
-        binding.choiceButton1.setVisibility(View.INVISIBLE)
-
-        nextPosition1= ""
-        nextPosition2= "likecostom"
-        nextPosition3= "dislikecostom"
+    fun likefilm() {
+        updateGameState(
+            R.drawable.film,
+            "Great! It’s time to sleep...",
+            "Yes, it’s too late...",
+            "",
+            "",
+            "endPoint",
+            "",
+            "")
     }
-    fun likecostom(){
 
-        binding.gameView.setImageResource(R.drawable.haloween)
-        binding.gameTextView.setText("Thank you! Let’s go to sleep.")
-        binding.gameMC.setVisibility(View.INVISIBLE)
-
-        binding.inputName.setVisibility(View.INVISIBLE)
-
-        binding.choiceButton1.setText("Yes, it’s too late...")
-        binding.choiceButton2.setText("")
-        binding.choiceButton3.setText("")
-
-        binding.choiceButton1.setVisibility(View.VISIBLE)
-        binding.choiceButton2.setVisibility(View.INVISIBLE)
-        binding.choiceButton3.setVisibility(View.INVISIBLE)
-
-        nextPosition1= "endPoint"
-        nextPosition2= ""
-        nextPosition3= ""
+    fun dislikefilm() {
+        updateGameState(
+            R.drawable.film,
+            "May be go sleep?",
+            "Yes, it’s too late...",
+            "",
+            "",
+            "endPoint",
+            "",
+            "")
     }
-    fun dislikecostom(){
 
-        binding.gameView.setImageResource(R.drawable.haloween)
-        binding.gameTextView.setText("It’s ok, i’m not taking offence. Let’s go to sleep!")
-        binding.gameMC.setVisibility(View.INVISIBLE)
+    fun halloween() {
+        updateGameState(
+            R.drawable.costum,
+            "Very beautiful!",
+            "",
+            "Yes! Let’s watch the film!",
+            "Yes! Let’s create costume!",
+            "",
+            "film",
+            "costom")
+    }
 
-        binding.inputName.setVisibility(View.INVISIBLE)
+    fun costom() {
+        updateGameState(
+            R.drawable.haloween,
+            "I like your costume.",
+            "",
+            "Your costume is beautiful too!",
+            "To tell you the truth, I don’t like your...",
+            "",
+            "likecostom",
+            "dislikecostom")
+    }
 
-        binding.choiceButton1.setText("Yes, it’s too late...")
-        binding.choiceButton2.setText("")
-        binding.choiceButton3.setText("")
+    fun likecostom() {
+        updateGameState(
+            R.drawable.haloween,
+            "Thank you! Let’s go to sleep.",
+            "Yes, it’s too late...",
+            "",
+            "",
+            "endPoint",
+            "",
+            "")
+    }
 
-        binding.choiceButton1.setVisibility(View.VISIBLE)
-        binding.choiceButton2.setVisibility(View.INVISIBLE)
-        binding.choiceButton3.setVisibility(View.INVISIBLE)
-
-        nextPosition1= "endPoint"
-        nextPosition2= ""
-        nextPosition3= ""
+     fun dislikecostom() {
+        updateGameState(
+            R.drawable.haloween,
+            "It’s ok, I’m not taking offense. Let’s go to sleep!",
+            "Yes, it’s too late...",
+            "",
+            "",
+            "endPoint",
+            "",
+            "")
     }
 
 
