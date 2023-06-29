@@ -28,18 +28,5 @@ class MainActivity : AppCompatActivity() {
         startActivity(intent)
 
     }
-/*    fun saveScenarioList(context: Context, scenarioList: List<Scenario>, fileName: String) {
-        val gson = Gson()
-        val json = gson.toJson(scenarioList)
-        val file = File(context.filesDir, fileName)
-        file.writeText(json)
-    }
-
-    fun loadScenarioList(context: Context, fileName: String): List<Scenario> {
-        val file = File(context.filesDir, fileName)
-        val json = file.readText()
-        val type = object : TypeToken<List<Scenario>>() {}.type
-        return Gson().fromJson(json, type)
-    }*/
 
 }
