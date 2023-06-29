@@ -11,39 +11,54 @@ import com.google.gson.Gson
 import java.io.File
 import java.io.FileWriter
 
+
+enum class Position {
+    INPUT_POINT,
+    STARTING_POINT,
+    WALKING,
+    HIKING,
+    FIELD,
+    FILM,
+    LIKE_FILM,
+    DISLIKE_FILM,
+    HALLOWEEN,
+    COSTUME,
+    LIKE_COSTUME,
+    DISLIKE_COSTUME,
+    END_POINT,
+    GO_TITLE_SCREEN
+}
+
 class Story(private val binding: ActivityGameScreenBinding) {
 
-    var nextPosition1= "";
-    var nextPosition2= "";
-    var nextPosition3= "";
 
-    fun showAllbuttons(){
-        binding.choiceButton1.setVisibility(View.VISIBLE)
-        binding.choiceButton2.setVisibility(View.VISIBLE)
-        binding.choiceButton3.setVisibility(View.VISIBLE)
+    private var nextPositions: MutableList<Position> = mutableListOf()
+
+    fun showAllButtons() {
+        binding.choiceButton1.visibility = View.VISIBLE
+        binding.choiceButton2.visibility = View.VISIBLE
+        binding.choiceButton3.visibility = View.VISIBLE
     }
-    fun selectedPosition(position: String){
 
+    fun selectedPosition(position: Position) {
         val mainActivity = MainActivity()
 
-        when(position){
-            "inputPoint" -> inputPoint()
-            "startingPoint" -> startingPoint()
-            "walking" -> walking()
-            "hiking" -> hiking()
-            "field" -> field()
-            "film" -> film()
-            "likefilm" -> likefilm()
-            "dislikefilm" -> dislikefilm()
-            "halloween" -> halloween()
-            "costom" -> costom()
-            "likecostom" -> likecostom()
-            "dislikecostom" -> dislikecostom()
-            "endPoint" -> endPoint()
-            "goTitleScreen" ->  mainActivity.goToTitleScreen()
-
+        when (position) {
+            Position.INPUT_POINT -> inputPoint()
+            Position.STARTING_POINT -> startingPoint()
+            Position.WALKING -> walking()
+            Position.HIKING -> hiking()
+            Position.FIELD -> field()
+            Position.FILM -> film()
+            Position.LIKE_FILM -> likeFilm()
+            Position.DISLIKE_FILM -> dislikeFilm()
+            Position.HALLOWEEN -> halloween()
+            Position.COSTUME -> costume()
+            Position.LIKE_COSTUME -> likeCostume()
+            Position.DISLIKE_COSTUME -> dislikeCostume()
+            Position.END_POINT -> endPoint()
+            Position.GO_TITLE_SCREEN -> mainActivity.goToTitleScreen()
         }
-
     }
 
     fun updateGameState(
@@ -52,65 +67,61 @@ class Story(private val binding: ActivityGameScreenBinding) {
         choiceButton1Text: String,
         choiceButton2Text: String,
         choiceButton3Text: String,
-        nextPosition1Value: String,
-        nextPosition2Value: String,
-        nextPosition3Value: String) {
+        vararg positions: Position
+    ) {
         setGameViews(imageResource, gameText)
         setChoiceButtons(choiceButton1Text, choiceButton2Text, choiceButton3Text)
-        updateNextPositions(nextPosition1Value, nextPosition2Value, nextPosition3Value)
+        updateNextPositions(*positions)
     }
 
     fun setGameViews(imageResource: Int, gameText: String) {
         binding.gameView.setImageResource(imageResource)
-        binding.gameTextView.setText(gameText)
-        binding.gameMC.setVisibility(View.INVISIBLE)
-        binding.inputName.setVisibility(View.INVISIBLE)
+        binding.gameTextView.text = gameText
+        binding.gameMC.visibility = View.INVISIBLE
+        binding.inputName.visibility = View.INVISIBLE
     }
 
     fun setChoiceButtons(choiceButton1Text: String, choiceButton2Text: String, choiceButton3Text: String) {
-        binding.choiceButton1.setText(choiceButton1Text)
-        binding.choiceButton2.setText(choiceButton2Text)
-        binding.choiceButton3.setText(choiceButton3Text)
-        binding.choiceButton1.setVisibility(if (choiceButton1Text.isEmpty()) View.INVISIBLE else View.VISIBLE)
+        binding.choiceButton1.text = choiceButton1Text
+        binding.choiceButton2.text = choiceButton2Text
+        binding.choiceButton3.text = choiceButton3Text
+        binding.choiceButton1.visibility = if (choiceButton1Text.isEmpty()) View.INVISIBLE else View.VISIBLE
     }
 
-    fun updateNextPositions(nextPosition1Value: String, nextPosition2Value: String, nextPosition3Value: String) {
-        nextPosition1 = nextPosition1Value
-        nextPosition2 = nextPosition2Value
-        nextPosition3 = nextPosition3Value
+    fun updateNextPositions(vararg positions: Position) {
+        nextPositions.clear()
+        nextPositions.addAll(positions)
     }
 
-
-    fun inputPoint(){
-        binding.gameTextView.setText("Hello! My name is Jack. And you?")
-        binding.inputName.setVisibility(View.VISIBLE)
-        binding.choiceButton1.setVisibility(View.INVISIBLE)
-        binding.choiceButton2.setVisibility(View.INVISIBLE)
+    fun inputPoint() {
+        binding.gameTextView.text = "Hello! My name is Jack. And you?"
+        binding.inputName.visibility = View.VISIBLE
+        binding.choiceButton1.visibility = View.INVISIBLE
+        binding.choiceButton2.visibility = View.INVISIBLE
 
         setChoiceButtons("", "", "Accept")
-        updateNextPositions("", "", "startingPoint")
-
+        updateNextPositions(Position.STARTING_POINT)
     }
 
-    fun startingPoint(){
+    fun startingPoint() {
         updateGameState(
             R.drawable.backgroud1,
             "",
             "Walking",
             "Hiking",
             "Go to the field",
-            "walking",
-            "Hiking",
-            "Go to the field")
+            Position.WALKING,
+            Position.HIKING,
+            Position.FIELD
+        )
 
         val inputEditText = binding.inputName.editText
         val username = inputEditText?.text.toString()
 
         binding.gameTextView.text = "Great, $username! What are we going to do?"
-        binding.inputName.setVisibility(View.INVISIBLE)
-        showAllbuttons()
+        binding.inputName.visibility = View.INVISIBLE
+        showAllButtons()
     }
-
 
     fun walking() {
         updateGameState(
@@ -119,9 +130,9 @@ class Story(private val binding: ActivityGameScreenBinding) {
             "",
             "Yes, and watch film",
             "Yes, and celebrate Halloween",
-            "",
-            "film",
-            "halloween")
+            Position.FILM,
+            Position.HALLOWEEN
+        )
     }
 
     fun hiking() {
@@ -131,9 +142,9 @@ class Story(private val binding: ActivityGameScreenBinding) {
             "",
             "Go home and watch the film",
             "Go home and celebrate Halloween",
-            "",
-            "film",
-            "halloween")
+            Position.FILM,
+            Position.HALLOWEEN
+        )
     }
 
     fun field() {
@@ -143,44 +154,43 @@ class Story(private val binding: ActivityGameScreenBinding) {
             "",
             "Maybe, let’s watch the film?",
             "Yes, let’s celebrate the Halloween",
-            "",
-            "film",
-            "halloween")
+            Position.FILM,
+            Position.HALLOWEEN
+        )
     }
 
     fun film() {
-        updateGameState(R.drawable.film,
+        updateGameState(
+            R.drawable.film,
             "Do you like this film?",
             "",
             "I like it!",
             "No...",
-            "",
-            "likefilm",
-            "dislikefilm")
+            Position.LIKE_FILM,
+            Position.DISLIKE_FILM
+        )
     }
 
-    fun likefilm() {
+    fun likeFilm() {
         updateGameState(
             R.drawable.film,
             "Great! It’s time to sleep...",
             "Yes, it’s too late...",
             "",
             "",
-            "endPoint",
-            "",
-            "")
+            Position.END_POINT
+        )
     }
 
-    fun dislikefilm() {
+    fun dislikeFilm() {
         updateGameState(
             R.drawable.film,
-            "May be go sleep?",
+            "Maybe go sleep?",
             "Yes, it’s too late...",
             "",
             "",
-            "endPoint",
-            "",
-            "")
+            Position.END_POINT
+        )
     }
 
     fun halloween() {
@@ -190,52 +200,49 @@ class Story(private val binding: ActivityGameScreenBinding) {
             "",
             "Yes! Let’s watch the film!",
             "Yes! Let’s create costume!",
-            "",
-            "film",
-            "costom")
+            Position.FILM,
+            Position.COSTUME
+        )
     }
 
-    fun costom() {
+    fun costume() {
         updateGameState(
             R.drawable.haloween,
             "I like your costume.",
             "",
             "Your costume is beautiful too!",
             "To tell you the truth, I don’t like your...",
-            "",
-            "likecostom",
-            "dislikecostom")
+            Position.LIKE_COSTUME,
+            Position.DISLIKE_COSTUME
+        )
     }
 
-    fun likecostom() {
+    fun likeCostume() {
         updateGameState(
             R.drawable.haloween,
             "Thank you! Let’s go to sleep.",
             "Yes, it’s too late...",
             "",
             "",
-            "endPoint",
-            "",
-            "")
+            Position.END_POINT
+        )
     }
 
-     fun dislikecostom() {
+    fun dislikeCostume() {
         updateGameState(
             R.drawable.haloween,
             "It’s ok, I’m not taking offense. Let’s go to sleep!",
             "Yes, it’s too late...",
             "",
             "",
-            "endPoint",
-            "",
-            "")
+            Position.END_POINT
+        )
     }
 
-
-    fun endPoint(){
+    fun endPoint() {
         binding.gameView.setImageResource(R.drawable.backgroud1)
 
-        binding.inputName.setVisibility(View.INVISIBLE)
+        binding.inputName.visibility = View.INVISIBLE
 
         binding.gameTextView.apply {
             text = "Thank You for playing!"
@@ -258,7 +265,6 @@ class Story(private val binding: ActivityGameScreenBinding) {
             ).toInt()
             layoutParams.verticalBias = 0.367f // between 0 and 1
             binding.gameTextView.layoutParams = layoutParams
-
         }
 
         binding.choiceButton1.apply {
@@ -266,8 +272,6 @@ class Story(private val binding: ActivityGameScreenBinding) {
             backgroundTintList = ColorStateList.valueOf(Color.parseColor("#275168"))
         }
 
-        nextPosition1= "goTitleScreen"
+        updateNextPositions(Position.GO_TITLE_SCREEN)
     }
-
-
 }
