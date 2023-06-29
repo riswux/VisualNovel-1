@@ -17,15 +17,6 @@ class Story(private val binding: ActivityGameScreenBinding) {
     var nextPosition2= "";
     var nextPosition3= "";
 
-    // Define a data class to represent a single record
-    data class Record(val position: String, val input: String)
-
-    // Keep track of all records in a list
-    val records = mutableListOf<Record>()
-
-    val gson = Gson()
-    val json = gson.toJson(records)
-
     fun showAllbuttons(){
         binding.choiceButton1.setVisibility(View.VISIBLE)
         binding.choiceButton2.setVisibility(View.VISIBLE)
@@ -52,10 +43,7 @@ class Story(private val binding: ActivityGameScreenBinding) {
             "goTitleScreen" ->  mainActivity.goToTitleScreen()
 
         }
-        // Record the current position and user input
-        val inputEditText = binding.inputName.editText
-        val input = inputEditText?.text.toString()
-        records.add(Record(position, input))
+
     }
 
     fun inputPoint(){
