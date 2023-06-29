@@ -46,20 +46,29 @@ class Story(private val binding: ActivityGameScreenBinding) {
 
     }
 
+    fun setChoiceButtons(choiceButton1Text: String, choiceButton2Text: String, choiceButton3Text: String) {
+        binding.choiceButton1.setText(choiceButton1Text)
+        binding.choiceButton2.setText(choiceButton2Text)
+        binding.choiceButton3.setText(choiceButton3Text)
+        binding.choiceButton1.setVisibility(if (choiceButton1Text.isEmpty()) View.INVISIBLE else View.VISIBLE)
+    }
+
+    fun updateNextPositions(nextPosition1Value: String, nextPosition2Value: String, nextPosition3Value: String) {
+        nextPosition1 = nextPosition1Value
+        nextPosition2 = nextPosition2Value
+        nextPosition3 = nextPosition3Value
+    }
+
+
     fun inputPoint(){
         binding.gameTextView.setText("Hello! My name is Jack. And you?")
         binding.inputName.setVisibility(View.VISIBLE)
-
-        binding.choiceButton1.setText("")
-        binding.choiceButton2.setText("")
-        binding.choiceButton3.setText("Accept")
-
         binding.choiceButton1.setVisibility(View.INVISIBLE)
         binding.choiceButton2.setVisibility(View.INVISIBLE)
 
-        nextPosition1= ""
-        nextPosition2= ""
-        nextPosition3= "startingPoint"
+        setChoiceButtons("", "", "Accept")
+        updateNextPositions("", "", "startingPoint")
+
     }
 
     fun startingPoint(){
